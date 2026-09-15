@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,24 +15,36 @@ content="50 años de amor, historias y momentos. María & Juan.">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+
 <style>
 
+/* =====================================================
+   PALETA DE COLORES
+===================================================== */
+
 :root{
-    --ivory:#F7F3ED;
-    --champagne:#D8C5A5;
-    --champagne-dark:#BFA57D;
-    --rose:#D8B7B3;
-    --rose-light:#E8D2CF;
-    --sage:#C9D0BF;
-    --taupe:#8C7A70;
-    --brown:#403735;
-    --white:#FFFDF9;
+
+    --blue-light:#94AFC9;
+    --blue-dark:#2F496E;
+    --ivory:#F8F7F3;
+    --beige:#C8B2A3;
+
+    --white:#FFFFFF;
+
+    --text:#2F496E;
+    --soft:#71849A;
+
 }
 
+
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -39,10 +52,15 @@ html{
 }
 
 body{
+
     background:var(--ivory);
-    color:var(--brown);
+
+    color:var(--text);
+
     font-family:'Montserrat',sans-serif;
+
     overflow-x:hidden;
+
 }
 
 button,
@@ -55,319 +73,447 @@ a{
     color:inherit;
 }
 
-/* =========================
+
+/* =====================================================
    PORTADA
-========================= */
+===================================================== */
 
 .cover{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(216,197,165,.25), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(216,183,179,.20), transparent 30%),
-        var(--ivory);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    position:fixed;
+
+    inset:0;
+
+    z-index:1000;
+
+    overflow:hidden;
+
+    background:
+        var(--blue-dark);
 
     transition:
-        opacity 1s ease,
-        visibility 1s ease;
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+
 }
+
 
 .cover.hide{
+
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
+
 }
 
+
+/* FOTO DE FONDO */
+
+.cover-photo{
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        url("foto-pareja.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    transform:scale(1.03);
+
+    filter:
+        saturate(.75)
+        contrast(.9);
+
+}
+
+
+/* capa azul transparente */
+
+.cover-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(47,73,110,.42),
+            rgba(248,247,243,.70) 55%,
+            rgba(248,247,243,.94)
+        );
+
+}
+
+
+/* capa extra para lectura */
+
+.cover-overlay::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        rgba(148,175,201,.18);
+
+}
+
+
+/* CONTENIDO */
+
 .cover-content{
-    width:100%;
-    max-width:600px;
+
+    position:relative;
+
+    z-index:10;
+
     min-height:100vh;
 
+    width:100%;
+
+    max-width:650px;
+
+    margin:auto;
+
+    padding:
+        35px 25px 45px;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
 
     text-align:center;
-    padding:30px 20px;
+
+}
+
+
+/* pequeño texto superior */
+
+.cover-top{
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    color:var(--white);
+
+    margin-bottom:20px;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.25);
+
+}
+
+
+/* NUMERO 50 */
+
+.cover-number{
 
     position:relative;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:180px;
+
+    line-height:.75;
+
+    font-weight:300;
+
+    color:var(--white);
+
+    letter-spacing:-10px;
+
+    text-shadow:
+        0 3px 25px rgba(47,73,110,.30);
+
+    opacity:0;
+
+    transform:
+        translateY(25px)
+        scale(.92);
+
+    animation:
+        numberAppear 1.5s ease forwards;
+
 }
 
-/* ramas */
 
-.branch{
-    position:absolute;
-    width:170px;
-    height:170px;
-    opacity:.55;
-}
+.cover-number::before{
 
-.branch.left{
-    left:-35px;
-    top:70px;
-    transform:rotate(-25deg);
-}
-
-.branch.right{
-    right:-35px;
-    bottom:80px;
-    transform:rotate(155deg);
-}
-
-.branch::before,
-.branch::after{
     content:"";
+
     position:absolute;
-    background:var(--sage);
-    border-radius:100% 0 100% 0;
-}
 
-.branch::before{
-    width:70px;
-    height:13px;
-    left:30px;
-    top:70px;
-    transform:rotate(-30deg);
-    box-shadow:
-        35px 20px 0 -2px var(--sage),
-        60px 35px 0 -3px var(--sage);
-}
+    width:205px;
 
-.branch::after{
-    width:13px;
-    height:70px;
-    left:65px;
-    top:40px;
-    transform:rotate(20deg);
-}
+    height:205px;
 
-/* sello */
-
-.seal{
-    width:82px;
-    height:82px;
+    border:1px solid rgba(255,255,255,.75);
 
     border-radius:50%;
 
-    background:
-        radial-gradient(circle at 35% 30%,
-        #eadcc1,
-        var(--champagne));
+    left:50%;
 
-    border:1px solid rgba(191,165,125,.7);
+    top:50%;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    transform:
+        translate(-50%,-50%);
 
-    color:#7b6751;
-
-    font-family:'Cormorant Garamond',serif;
-    font-size:34px;
-    font-weight:600;
-
-    box-shadow:
-        0 10px 25px rgba(80,60,40,.12);
-
-    position:relative;
-    z-index:20;
-
-    transition:all 1.3s ease;
 }
 
-.cover.open .seal{
-    transform:scale(.3) translateY(-130px);
-    opacity:0;
+
+@keyframes numberAppear{
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
 }
 
-/* numero */
 
-.cover-number{
-    font-family:'Cormorant Garamond',serif;
-    font-size:145px;
-    line-height:.75;
-    font-weight:300;
+/* línea */
 
-    color:var(--champagne-dark);
+.cover-line{
 
-    position:absolute;
-    top:39%;
+    width:80px;
 
-    opacity:.18;
+    height:1px;
 
-    letter-spacing:-8px;
+    background:rgba(255,255,255,.8);
 
-    transition:
-        transform 2.2s cubic-bezier(.2,.8,.2,1),
-        opacity 1.5s ease;
+    margin:32px 0 20px;
+
 }
 
-.cover.open .cover-number{
-    transform:translateY(-170px) scale(1.05);
-    opacity:1;
-}
 
 /* nombres */
 
 .cover-names{
-    margin-top:25px;
 
     font-family:'Cormorant Garamond',serif;
-    font-size:42px;
 
-    color:var(--brown);
+    font-size:47px;
 
-    opacity:0;
+    line-height:1;
 
-    transform:translateY(35px);
+    font-weight:500;
 
-    transition:
-        opacity 1.4s ease 1s,
-        transform 1.5s ease 1s;
+    color:var(--white);
+
+    text-shadow:
+        0 3px 18px rgba(47,73,110,.35);
+
 }
 
-.cover.open .cover-names{
-    opacity:1;
-    transform:translateY(-95px);
-}
 
-.cover-subtitle{
-    margin-top:10px;
-
-    font-size:12px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    color:var(--taupe);
-
-    opacity:0;
-
-    transition:opacity 1.5s ease 1.2s;
-}
-
-.cover.open .cover-subtitle{
-    opacity:1;
-}
-
-/* texto portada */
+/* texto */
 
 .cover-message{
-    margin-top:28px;
 
-    max-width:360px;
+    max-width:400px;
+
+    margin-top:20px;
 
     font-family:'Cormorant Garamond',serif;
-    font-size:23px;
-    line-height:1.4;
 
-    color:var(--taupe);
+    font-size:24px;
+
+    line-height:1.35;
+
+    color:var(--white);
+
+    text-shadow:
+        0 2px 15px rgba(47,73,110,.35);
+
 }
 
-/* botón */
+
+/* BOTON */
 
 .open-btn{
-    margin-top:30px;
 
-    border:1px solid var(--champagne-dark);
+    margin-top:32px;
 
-    background:rgba(255,255,255,.4);
+    padding:16px 32px;
 
-    color:var(--brown);
+    border-radius:50px;
 
-    padding:15px 28px;
+    border:1px solid rgba(255,255,255,.8);
 
-    border-radius:40px;
+    background:
+        rgba(47,73,110,.78);
 
-    font-size:11px;
+    color:white;
+
+    font-size:10px;
+
     letter-spacing:2px;
 
     cursor:pointer;
 
     transition:.4s;
 
-    box-shadow:0 8px 20px rgba(70,50,30,.08);
+    backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 10px 30px rgba(47,73,110,.25);
+
 }
+
 
 .open-btn:hover{
-    background:var(--champagne);
-    transform:translateY(-3px);
+
+    background:var(--blue-dark);
+
+    transform:
+        translateY(-3px);
+
 }
 
-/* sparkles */
+
+/* =====================================================
+   DESTELLOS
+===================================================== */
 
 .sparkle{
+
     position:absolute;
-    color:var(--champagne-dark);
-    font-size:18px;
 
-    animation:twinkle 2.5s infinite ease-in-out;
+    color:white;
+
+    font-size:17px;
+
+    opacity:.7;
+
+    animation:
+        sparkle 3s infinite ease-in-out;
+
 }
 
-.s1{
-    top:22%;
-    left:25%;
+
+.sparkle.one{
+
+    top:20%;
+
+    left:18%;
+
 }
 
-.s2{
-    top:30%;
-    right:23%;
-    animation-delay:.8s;
+
+.sparkle.two{
+
+    top:27%;
+
+    right:18%;
+
+    animation-delay:.7s;
+
 }
 
-.s3{
-    bottom:27%;
-    left:28%;
-    animation-delay:1.2s;
+
+.sparkle.three{
+
+    bottom:24%;
+
+    left:22%;
+
+    animation-delay:1.4s;
+
 }
 
-.s4{
-    bottom:22%;
-    right:30%;
-    animation-delay:1.8s;
+
+.sparkle.four{
+
+    bottom:20%;
+
+    right:25%;
+
+    animation-delay:2s;
+
 }
 
-@keyframes twinkle{
+
+@keyframes sparkle{
 
     0%,100%{
+
         opacity:.2;
-        transform:scale(.8);
+
+        transform:scale(.7);
+
     }
 
     50%{
+
         opacity:1;
+
         transform:scale(1.3);
+
     }
+
 }
 
-/* =========================
+
+/* =====================================================
    INVITACIÓN
-========================= */
+===================================================== */
 
 .invitation{
+
     opacity:0;
+
     visibility:hidden;
+
     transition:opacity 1s ease;
+
 }
+
 
 .invitation.show{
+
     opacity:1;
+
     visibility:visible;
+
 }
 
-/* hero */
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero{
+
     min-height:100vh;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
 
     text-align:center;
@@ -375,136 +521,193 @@ a{
     padding:80px 20px;
 
     background:
-        radial-gradient(circle at 50% 20%, rgba(216,197,165,.25), transparent 35%),
-        linear-gradient(
-            180deg,
-            #F9F5EF 0%,
-            #F5EEE6 100%
-        );
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(148,175,201,.22),
+            transparent 40%
+        ),
+
+        var(--ivory);
 
     position:relative;
+
 }
+
 
 .hero-small{
-    font-size:11px;
+
+    font-size:10px;
+
     letter-spacing:5px;
-    color:var(--taupe);
+
     text-transform:uppercase;
+
+    color:var(--soft);
+
 }
 
-.hero-number{
-    font-family:'Cormorant Garamond',serif;
-    font-size:180px;
-    line-height:.75;
 
-    color:var(--champagne-dark);
+.hero-number{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:180px;
 
     font-weight:300;
 
-    margin:35px 0 20px;
+    line-height:.75;
+
+    color:var(--blue-dark);
+
+    margin:40px 0 25px;
 
     position:relative;
+
 }
 
+
 .hero-number::after{
+
     content:"";
 
     position:absolute;
 
     width:210px;
+
     height:210px;
 
-    border:1px solid var(--champagne);
+    border:1px solid var(--blue-light);
 
     border-radius:50%;
 
     left:50%;
+
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    opacity:.5;
 }
+
 
 .hero h1{
+
     font-family:'Cormorant Garamond',serif;
 
-    font-size:48px;
+    font-size:52px;
+
     font-weight:500;
 
-    margin-bottom:15px;
+    color:var(--blue-dark);
+
 }
 
+
 .hero p{
+
     max-width:500px;
 
-    color:var(--taupe);
+    margin-top:18px;
 
     font-family:'Cormorant Garamond',serif;
 
     font-size:25px;
 
-    line-height:1.4;
+    line-height:1.45;
+
+    color:var(--soft);
+
 }
+
 
 .scroll{
+
     position:absolute;
+
     bottom:30px;
 
-    font-size:10px;
+    font-size:9px;
+
     letter-spacing:3px;
+
     text-transform:uppercase;
 
-    color:var(--taupe);
+    color:var(--soft);
+
 }
 
-/* =========================
+
+/* =====================================================
    SECCIONES
-========================= */
+===================================================== */
 
 section{
+
     padding:90px 20px;
+
 }
+
 
 .section-inner{
+
     width:100%;
+
     max-width:900px;
+
     margin:auto;
+
 }
 
+
 .section-title{
+
     text-align:center;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:46px;
+    font-size:48px;
 
     font-weight:500;
 
+    color:var(--blue-dark);
+
     margin-bottom:15px;
+
 }
 
-.section-subtitle{
-    text-align:center;
 
-    color:var(--taupe);
+.section-subtitle{
 
     max-width:600px;
 
-    margin:0 auto 50px;
+    margin:
+        0 auto 50px;
 
-    line-height:1.7;
+    text-align:center;
 
-    font-size:14px;
+    color:var(--soft);
+
+    font-size:13px;
+
+    line-height:1.8;
+
 }
 
-/* evento */
+
+/* =====================================================
+   EVENTO
+===================================================== */
 
 .event-section{
+
     background:var(--white);
+
 }
 
+
 .event-grid{
+
     display:grid;
 
     grid-template-columns:
@@ -512,42 +715,77 @@ section{
 
     gap:20px;
 
-    margin-top:50px;
 }
 
-.event-card{
-    background:var(--ivory);
 
-    border:1px solid rgba(191,165,125,.25);
+.event-card{
 
     padding:35px 20px;
 
     text-align:center;
 
-    border-radius:4px;
+    background:var(--ivory);
+
+    border:
+        1px solid
+        rgba(148,175,201,.35);
+
+    border-radius:6px;
+
+    transition:.3s;
+
 }
+
+
+.event-card:hover{
+
+    transform:
+        translateY(-5px);
+
+}
+
 
 .event-icon{
-    font-size:24px;
-    margin-bottom:12px;
+
+    font-size:25px;
+
+    color:var(--blue-light);
+
+    margin-bottom:15px;
+
 }
+
 
 .event-card h3{
+
     font-family:'Cormorant Garamond',serif;
+
     font-size:27px;
-    font-weight:500;
-    margin-bottom:8px;
+
+    color:var(--blue-dark);
+
+    margin-bottom:10px;
+
 }
+
 
 .event-card p{
+
+    color:var(--soft);
+
     font-size:12px;
-    color:var(--taupe);
+
     line-height:1.7;
+
 }
 
-/* botones */
+
+/* =====================================================
+   BOTONES
+===================================================== */
 
 .buttons{
+
     display:flex;
 
     justify-content:center;
@@ -557,14 +795,21 @@ section{
     flex-wrap:wrap;
 
     margin-top:35px;
+
 }
 
+
 .btn{
-    padding:14px 23px;
 
-    border-radius:30px;
+    display:inline-block;
 
-    border:1px solid var(--champagne-dark);
+    padding:14px 24px;
+
+    border:
+        1px solid
+        var(--blue-light);
+
+    border-radius:50px;
 
     font-size:10px;
 
@@ -572,28 +817,43 @@ section{
 
     text-transform:uppercase;
 
+    color:var(--blue-dark);
+
     transition:.3s;
+
 }
+
 
 .btn:hover{
-    transform:translateY(-3px);
-    background:var(--champagne);
+
+    background:var(--blue-dark);
+
+    color:white;
+
 }
 
-/* cuenta regresiva */
+
+/* =====================================================
+   CUENTA REGRESIVA
+===================================================== */
 
 .countdown{
+
     background:
+
         linear-gradient(
             135deg,
-            #EEE8DE,
-            #F9F5EF
+            #E9EEF3,
+            var(--ivory)
         );
 
     text-align:center;
+
 }
 
+
 .countdown-box{
+
     display:flex;
 
     justify-content:center;
@@ -602,229 +862,335 @@ section{
 
     flex-wrap:wrap;
 
-    margin-top:35px;
 }
+
 
 .time{
-    min-width:100px;
 
-    padding:22px 15px;
+    min-width:105px;
 
-    background:rgba(255,255,255,.65);
+    padding:23px 15px;
 
-    border:1px solid rgba(191,165,125,.25);
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        1px solid
+        rgba(148,175,201,.3);
+
 }
 
+
 .time span{
+
     display:block;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:42px;
+    font-size:43px;
 
-    color:var(--champagne-dark);
+    color:var(--blue-dark);
+
 }
 
+
 .time small{
+
     font-size:9px;
 
     letter-spacing:2px;
 
-    color:var(--taupe);
+    color:var(--soft);
 
     text-transform:uppercase;
+
 }
 
-/* recuerdos */
+
+/* =====================================================
+   RECUERDOS
+===================================================== */
 
 .memories{
+
     background:var(--white);
+
 }
 
+
 .timeline{
+
     position:relative;
 
     max-width:700px;
 
     margin:50px auto 0;
+
 }
 
+
 .timeline::before{
+
     content:"";
 
     position:absolute;
 
-    left:50%;
-
     top:0;
+
     bottom:0;
+
+    left:50%;
 
     width:1px;
 
-    background:var(--champagne);
+    background:var(--blue-light);
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
+
 }
 
+
 .timeline-item{
+
     width:50%;
 
     padding:20px 35px;
 
     position:relative;
+
 }
+
 
 .timeline-item:nth-child(odd){
+
     text-align:right;
+
 }
+
 
 .timeline-item:nth-child(even){
+
     margin-left:50%;
+
 }
 
+
 .timeline-dot{
+
     position:absolute;
 
+    top:30px;
+
     width:12px;
+
     height:12px;
 
     border-radius:50%;
 
-    background:var(--rose);
+    background:var(--beige);
 
-    border:3px solid var(--ivory);
+    border:
+        3px solid
+        var(--ivory);
 
-    top:30px;
 }
 
-.timeline-item:nth-child(odd) .timeline-dot{
+
+.timeline-item:nth-child(odd)
+.timeline-dot{
+
     right:-6px;
+
 }
 
-.timeline-item:nth-child(even) .timeline-dot{
+
+.timeline-item:nth-child(even)
+.timeline-dot{
+
     left:-6px;
+
 }
+
 
 .timeline-year{
+
     font-family:'Cormorant Garamond',serif;
 
-    color:var(--champagne-dark);
+    font-size:31px;
 
-    font-size:30px;
+    color:var(--blue-dark);
+
 }
 
-.timeline-item p{
-    font-size:12px;
 
-    color:var(--taupe);
+.timeline-item p{
+
+    margin-top:5px;
+
+    font-size:12px;
 
     line-height:1.7;
 
-    margin-top:5px;
+    color:var(--soft);
+
 }
 
-/* galería */
+
+/* =====================================================
+   GALERÍA
+===================================================== */
 
 .gallery{
+
     background:var(--ivory);
+
 }
 
+
 .gallery-grid{
+
     display:grid;
 
     grid-template-columns:
         repeat(3,1fr);
 
     gap:14px;
+
 }
 
+
 .gallery-item{
+
     aspect-ratio:1/1;
 
     overflow:hidden;
 
-    border-radius:3px;
+    background:var(--beige);
 
-    background:var(--rose-light);
+    border-radius:5px;
+
 }
 
+
 .gallery-item img{
+
     width:100%;
+
     height:100%;
 
     object-fit:cover;
 
     transition:
         transform .6s ease;
+
 }
+
 
 .gallery-item:hover img{
+
     transform:scale(1.06);
+
 }
 
-/* música */
+
+/* =====================================================
+   MÚSICA
+===================================================== */
 
 .music-section{
+
     background:
+
         linear-gradient(
             135deg,
-            #EDE8DE,
-            #F8F3ED
+            #E7EDF3,
+            #F8F7F3
         );
 
     text-align:center;
+
 }
 
+
 .music-circle{
-    width:110px;
-    height:110px;
+
+    width:115px;
+
+    height:115px;
 
     margin:35px auto;
 
     border-radius:50%;
 
-    border:1px solid var(--champagne-dark);
+    border:
+        1px solid
+        var(--blue-light);
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    font-size:32px;
+    font-size:30px;
+
+    color:var(--blue-dark);
 
     cursor:pointer;
 
-    background:rgba(255,255,255,.45);
+    background:
+        rgba(255,255,255,.7);
 
     transition:.4s;
+
 }
+
 
 .music-circle:hover{
-    transform:scale(1.05);
 
-    background:var(--rose-light);
+    transform:scale(1.06);
+
+    background:var(--blue-light);
+
+    color:white;
+
 }
+
 
 .music-note{
+
     font-family:'Cormorant Garamond',serif;
 
-    font-size:23px;
+    font-size:22px;
 
-    color:var(--taupe);
+    color:var(--soft);
+
 }
 
-/* mensaje */
+
+/* =====================================================
+   MENSAJE
+===================================================== */
 
 .message-section{
+
     background:var(--white);
+
 }
 
+
 .message-box{
+
     max-width:650px;
 
     margin:auto;
+
 }
 
+
 .message-box textarea{
+
     width:100%;
 
     min-height:140px;
@@ -833,35 +1199,46 @@ section{
 
     padding:18px;
 
-    border:1px solid rgba(191,165,125,.4);
+    border:
+        1px solid
+        rgba(148,175,201,.45);
 
     background:var(--ivory);
 
-    color:var(--brown);
+    color:var(--text);
 
     font-family:'Montserrat',sans-serif;
 
     outline:none;
 
-    border-radius:3px;
+    border-radius:5px;
+
 }
+
 
 .message-box textarea:focus{
-    border-color:var(--champagne-dark);
+
+    border-color:
+        var(--blue-light);
+
 }
 
+
 .send-message{
+
     margin-top:15px;
 
-    display:inline-block;
+    padding:14px 24px;
 
-    padding:13px 22px;
+    border:
+        1px solid
+        var(--blue-light);
 
-    border:1px solid var(--champagne-dark);
-
-    border-radius:30px;
+    border-radius:50px;
 
     background:transparent;
+
+    color:var(--blue-dark);
 
     cursor:pointer;
 
@@ -870,11 +1247,16 @@ section{
     letter-spacing:1.5px;
 
     text-transform:uppercase;
+
 }
 
-/* cierre */
+
+/* =====================================================
+   CIERRE
+===================================================== */
 
 .closing{
+
     min-height:75vh;
 
     display:flex;
@@ -886,92 +1268,130 @@ section{
     text-align:center;
 
     background:
+
         radial-gradient(
             circle at center,
-            rgba(216,197,165,.3),
+            rgba(148,175,201,.22),
             transparent 45%
         ),
+
         var(--ivory);
+
 }
+
 
 .closing-inner{
+
     max-width:650px;
+
 }
 
+
 .closing-number{
+
     font-family:'Cormorant Garamond',serif;
 
     font-size:120px;
 
-    color:var(--champagne-dark);
-
     font-weight:300;
 
     line-height:1;
+
+    color:var(--blue-dark);
+
 }
 
+
 .closing h2{
+
     font-family:'Cormorant Garamond',serif;
 
-    font-size:42px;
+    font-size:43px;
 
     font-weight:500;
 
     margin:20px 0;
+
+    color:var(--blue-dark);
+
 }
 
+
 .closing p{
+
     font-family:'Cormorant Garamond',serif;
 
     font-size:24px;
 
     line-height:1.5;
 
-    color:var(--taupe);
+    color:var(--soft);
+
 }
 
+
 .names{
+
     margin-top:30px;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:38px;
+    font-size:40px;
+
+    color:var(--blue-dark);
+
 }
 
-/* footer */
+
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
-    text-align:center;
 
     padding:25px;
 
-    background:#EDE5DA;
+    text-align:center;
+
+    background:var(--blue-dark);
+
+    color:white;
 
     font-size:9px;
 
     letter-spacing:2px;
 
-    color:var(--taupe);
-
     text-transform:uppercase;
+
 }
 
-/* música flotante */
+
+/* =====================================================
+   BOTÓN MÚSICA
+===================================================== */
 
 .music-floating{
+
     position:fixed;
 
     right:20px;
+
     bottom:20px;
 
     width:52px;
+
     height:52px;
 
     border-radius:50%;
 
-    border:1px solid var(--champagne-dark);
+    border:
+        1px solid
+        var(--blue-light);
 
-    background:rgba(255,253,249,.9);
+    background:
+        rgba(248,247,243,.94);
+
+    color:var(--blue-dark);
 
     z-index:500;
 
@@ -980,61 +1400,128 @@ footer{
     font-size:20px;
 
     box-shadow:
-        0 8px 25px rgba(60,40,20,.12);
+        0 8px 25px
+        rgba(47,73,110,.15);
+
 }
 
-/* =========================
+
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media(max-width:700px){
 
-    .cover-number{
-        font-size:120px;
+    .cover-content{
+
+        padding:
+            30px 20px 40px;
+
     }
+
+
+    .cover-top{
+
+        font-size:9px;
+
+        letter-spacing:4px;
+
+    }
+
+
+    .cover-number{
+
+        font-size:135px;
+
+    }
+
+
+    .cover-number::before{
+
+        width:160px;
+
+        height:160px;
+
+    }
+
 
     .cover-names{
-        font-size:36px;
+
+        font-size:39px;
+
     }
+
 
     .cover-message{
-        font-size:20px;
+
+        font-size:21px;
+
+        max-width:330px;
+
     }
+
 
     .hero-number{
+
         font-size:145px;
+
     }
+
 
     .hero-number::after{
+
         width:175px;
+
         height:175px;
+
     }
+
 
     .hero h1{
-        font-size:40px;
+
+        font-size:42px;
+
     }
+
 
     .hero p{
+
         font-size:21px;
+
     }
+
 
     .section-title{
-        font-size:39px;
+
+        font-size:40px;
+
     }
+
 
     .event-grid{
+
         grid-template-columns:1fr;
+
     }
+
 
     .gallery-grid{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
+
     }
+
 
     .timeline::before{
+
         left:15px;
+
     }
 
+
     .timeline-item{
+
         width:100%;
 
         margin-left:0 !important;
@@ -1044,72 +1531,126 @@ footer{
         padding-right:10px;
 
         text-align:left !important;
+
     }
 
-    .timeline-item:nth-child(odd) .timeline-dot,
-    .timeline-item:nth-child(even) .timeline-dot{
+
+    .timeline-item:nth-child(odd)
+    .timeline-dot,
+    .timeline-item:nth-child(even)
+    .timeline-dot{
+
         left:9px;
+
         right:auto;
+
     }
+
 
     .closing-number{
+
         font-size:90px;
+
     }
+
 
     .closing h2{
+
         font-size:35px;
+
     }
+
 
     .closing p{
+
         font-size:21px;
+
     }
 
+
     .names{
+
         font-size:34px;
+
     }
 
 }
 
 </style>
+
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      PORTADA
 ===================================================== -->
 
-<div class="cover" id="cover">
+<div
+    class="cover"
+    id="cover">
+
+
+    <!-- FOTO DE MARÍA Y JUAN -->
+
+    <div class="cover-photo"></div>
+
+
+    <!-- TRANSPARENCIA SOBRE LA FOTO -->
+
+    <div class="cover-overlay"></div>
+
+
+    <!-- DESTELLOS -->
+
+    <div class="sparkle one">✦</div>
+
+    <div class="sparkle two">✧</div>
+
+    <div class="sparkle three">✦</div>
+
+    <div class="sparkle four">✧</div>
+
+
+    <!-- CONTENIDO -->
 
     <div class="cover-content">
 
-        <div class="branch left"></div>
-        <div class="branch right"></div>
 
-        <div class="sparkle s1">✦</div>
-        <div class="sparkle s2">✧</div>
-        <div class="sparkle s3">✦</div>
-        <div class="sparkle s4">✧</div>
+        <div class="cover-top">
 
-        <div class="seal">
-            50
+            50 años de amor
+
         </div>
+
 
         <div class="cover-number">
+
             50
+
         </div>
+
+
+        <div class="cover-line"></div>
+
 
         <div class="cover-names">
+
             María & Juan
+
         </div>
 
-        <div class="cover-subtitle">
-            50 años de amor
-        </div>
 
         <p class="cover-message">
-            Nos encantaría celebrar este momento tan especial junto a vos.
+
+            Una vida compartida,
+            miles de recuerdos
+            y una historia que merece celebrarse.
+
         </p>
+
 
         <button
             class="open-btn"
@@ -1119,9 +1660,11 @@ footer{
 
         </button>
 
+
     </div>
 
 </div>
+
 
 
 <!-- =====================================================
@@ -1137,104 +1680,167 @@ footer{
 
     <section class="hero">
 
+
         <div class="hero-small">
+
             Una vida compartida
+
         </div>
+
 
         <div class="hero-number">
+
             50
+
         </div>
+
 
         <h1>
+
             María & Juan
+
         </h1>
 
+
         <p>
-            50 años de amor, historias y momentos
+
+            50 años de amor,
+            historias y momentos
             que merecen ser celebrados.
+
         </p>
 
+
         <div class="scroll">
+
             Deslizá para descubrir
+
         </div>
+
 
     </section>
 
 
-    <!-- EVENTO -->
+
+    <!-- =================================================
+         EVENTO
+    ================================================= -->
 
     <section class="event-section">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 Una fecha para recordar
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Queremos compartir con vos una noche muy especial
                 para celebrar cinco décadas de amor y de vida compartida.
+
             </p>
 
 
             <div class="event-grid">
 
+
                 <div class="event-card">
 
+
                     <div class="event-icon">
+
                         ♡
+
                     </div>
 
+
                     <h3>
+
                         Sábado
+
                     </h3>
 
+
                     <p>
+
                         14 de noviembre<br>
                         2026
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="event-card">
 
+
                     <div class="event-icon">
+
                         ◷
+
                     </div>
 
+
                     <h3>
+
                         21:00 hs.
+
                     </h3>
 
+
                     <p>
+
                         Te esperamos para
                         compartir una noche inolvidable.
+
                     </p>
 
+
                 </div>
+
 
 
                 <div class="event-card">
 
+
                     <div class="event-icon">
+
                         ⌂
+
                     </div>
 
+
                     <h3>
+
                         Salón Los Olivos
+
                     </h3>
 
+
                     <p>
+
                         Lugar del evento
+
                     </p>
 
+
                 </div>
+
 
             </div>
 
 
+
             <div class="buttons">
+
 
                 <a
                     class="btn"
@@ -1255,179 +1861,297 @@ footer{
 
                 </a>
 
+
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- CUENTA REGRESIVA -->
+
+    <!-- =================================================
+         CUENTA REGRESIVA
+    ================================================= -->
 
     <section class="countdown">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 Falta muy poquito
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Estamos contando los días para volver a celebrar
                 juntos una historia de amor que ya lleva 50 años.
+
             </p>
 
 
             <div class="countdown-box">
 
-                <div class="time">
-                    <span id="days">00</span>
-                    <small>Días</small>
-                </div>
 
                 <div class="time">
-                    <span id="hours">00</span>
-                    <small>Horas</small>
+
+                    <span id="days">
+                        00
+                    </span>
+
+                    <small>
+                        Días
+                    </small>
+
                 </div>
 
-                <div class="time">
-                    <span id="minutes">00</span>
-                    <small>Minutos</small>
-                </div>
 
                 <div class="time">
-                    <span id="seconds">00</span>
-                    <small>Segundos</small>
+
+                    <span id="hours">
+                        00
+                    </span>
+
+                    <small>
+                        Horas
+                    </small>
+
                 </div>
+
+
+                <div class="time">
+
+                    <span id="minutes">
+                        00
+                    </span>
+
+                    <small>
+                        Minutos
+                    </small>
+
+                </div>
+
+
+                <div class="time">
+
+                    <span id="seconds">
+                        00
+                    </span>
+
+                    <small>
+                        Segundos
+                    </small>
+
+                </div>
+
 
             </div>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- RECUERDOS -->
+
+    <!-- =================================================
+         RECUERDOS
+    ================================================= -->
 
     <section class="memories">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 50 años · 50 recuerdos
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Una pequeña parte de una historia llena de
                 momentos, sueños, desafíos y mucho amor.
+
             </p>
 
 
             <div class="timeline">
 
+
                 <div class="timeline-item">
+
 
                     <div class="timeline-dot"></div>
 
+
                     <div class="timeline-year">
+
                         1976
+
                     </div>
 
+
                     <p>
+
                         El comienzo de una historia
                         que cambiaría sus vidas para siempre.
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="timeline-item">
+
 
                     <div class="timeline-dot"></div>
 
+
                     <div class="timeline-year">
+
                         1980
+
                     </div>
 
+
                     <p>
-                        Nuevos sueños, nuevos proyectos
+
+                        Nuevos sueños,
+                        nuevos proyectos
                         y una vida construida juntos.
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="timeline-item">
+
 
                     <div class="timeline-dot"></div>
 
+
                     <div class="timeline-year">
+
                         1990
+
                     </div>
 
+
                     <p>
-                        Una familia creciendo y
-                        cientos de recuerdos compartidos.
+
+                        Una familia creciendo
+                        y cientos de recuerdos compartidos.
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="timeline-item">
+
 
                     <div class="timeline-dot"></div>
 
+
                     <div class="timeline-year">
+
                         2000
+
                     </div>
 
+
                     <p>
-                        Más historias, más aventuras
+
+                        Más historias,
+                        más aventuras
                         y muchos momentos inolvidables.
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="timeline-item">
+
 
                     <div class="timeline-dot"></div>
 
+
                     <div class="timeline-year">
+
                         2026
+
                     </div>
 
+
                     <p>
+
                         50 años después,
                         seguimos celebrando el amor.
+
                     </p>
 
+
                 </div>
+
 
             </div>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- GALERÍA -->
+
+    <!-- =================================================
+         GALERÍA
+    ================================================= -->
 
     <section class="gallery">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 Algunos recuerdos
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Porque una vida juntos está hecha
                 de pequeños momentos que se vuelven eternos.
+
             </p>
 
 
             <div class="gallery-grid">
+
 
                 <div class="gallery-item">
 
@@ -1469,7 +2193,7 @@ footer{
 
                     <img
                     src="https://images.pexels.com/photos/7911046/pexels-photo-7911046.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Celebración de aniversario">
+                    alt="Celebración">
 
                 </div>
 
@@ -1482,33 +2206,46 @@ footer{
 
                 </div>
 
+
             </div>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- MÚSICA -->
+
+    <!-- =================================================
+         MÚSICA
+    ================================================= -->
 
     <section class="music-section">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 Nuestra canción
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Una melodía para acompañar este momento
                 y recordar todo lo vivido.
+
             </p>
 
 
             <div
                 class="music-circle"
-                onclick="toggleMusic()"
-                id="musicCircle">
+                id="musicCircle"
+                onclick="toggleMusic()">
 
                 ♪
 
@@ -1516,36 +2253,50 @@ footer{
 
 
             <div class="music-note">
+
                 Tocá para reproducir
+
             </div>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- MENSAJE -->
+
+    <!-- =================================================
+         MENSAJE
+    ================================================= -->
 
     <section class="message-section">
 
+
         <div class="section-inner">
 
+
             <h2 class="section-title">
+
                 Dejanos un mensaje
+
             </h2>
 
+
             <p class="section-subtitle">
+
                 Si querés, podés dejarles unas palabras
                 para María y Juan.
+
             </p>
 
 
             <div class="message-box">
 
+
                 <textarea
                     id="guestMessage"
-                    placeholder="Escribí aquí tu mensaje...">
-                </textarea>
+                    placeholder="Escribí aquí tu mensaje..."></textarea>
 
 
                 <button
@@ -1556,38 +2307,60 @@ footer{
 
                 </button>
 
+
             </div>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- CIERRE -->
+
+    <!-- =================================================
+         CIERRE
+    ================================================= -->
 
     <section class="closing">
 
+
         <div class="closing-inner">
 
+
             <div class="closing-number">
+
                 50
+
             </div>
+
 
             <h2>
-                Una vida. Una historia.
+
+                Una vida.
+                Una historia.
                 Un gran amor.
+
             </h2>
 
+
             <p>
+
                 50 años después…
                 seguimos celebrando el amor.
+
             </p>
 
+
             <div class="names">
+
                 María & Juan
+
             </div>
 
+
         </div>
+
 
     </section>
 
@@ -1598,10 +2371,14 @@ footer{
 
     </footer>
 
+
 </main>
 
 
-<!-- MÚSICA -->
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
 
 <audio
     id="backgroundMusic"
@@ -1615,7 +2392,8 @@ footer{
 </audio>
 
 
-<!-- BOTÓN MÚSICA -->
+
+<!-- BOTÓN FLOTANTE -->
 
 <button
     class="music-floating"
@@ -1627,10 +2405,12 @@ footer{
 </button>
 
 
+
 <script>
 
+
 /* =====================================================
-   ABRIR INVITACIÓN
+   ABRIR INVITACIÓN + MÚSICA DESDE EL PRINCIPIO
 ===================================================== */
 
 function openInvitation(){
@@ -1641,50 +2421,77 @@ function openInvitation(){
     const invitation =
         document.getElementById("invitation");
 
-    cover.classList.add("open");
+    const music =
+        document.getElementById("backgroundMusic");
+
+    const floating =
+        document.getElementById("floatingMusic");
+
+    const circle =
+        document.getElementById("musicCircle");
+
 
     /*
-      Después de la animación
-      mostramos la invitación.
+       MUY IMPORTANTE:
+       cada vez que se abre la invitación,
+       la canción vuelve al segundo 0.
     */
 
-    setTimeout(function(){
+    music.pause();
 
-        cover.classList.add("hide");
+    music.currentTime = 0;
 
-        invitation.classList.add("show");
 
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
+    /*
+       Ocultamos portada
+    */
 
-        /*
-          Intentamos reproducir la música
-          después del clic del usuario.
-        */
+    cover.classList.add("hide");
 
-        const music =
-            document.getElementById("backgroundMusic");
 
-        music.play()
-        .then(function(){
+    /*
+       Mostramos invitación
+    */
 
-            document.getElementById("floatingMusic")
-            .textContent="❚❚";
+    invitation.classList.add("show");
 
-        })
-        .catch(function(){
 
-            console.log(
-                "El navegador requiere iniciar la música manualmente."
-            );
+    /*
+       Comenzamos música
+    */
 
-        });
+    music.play()
+    .then(function(){
 
-    },3000);
+        floating.textContent="❚❚";
+
+        if(circle){
+
+            circle.textContent="❚❚";
+
+        }
+
+    })
+    .catch(function(){
+
+        console.log(
+            "El navegador bloqueó la reproducción automática."
+        );
+
+    });
+
+
+    /*
+       Volver arriba
+    */
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
+
 
 
 /* =====================================================
@@ -1696,7 +2503,7 @@ function toggleMusic(){
     const music =
         document.getElementById("backgroundMusic");
 
-    const button =
+    const floating =
         document.getElementById("floatingMusic");
 
     const circle =
@@ -1705,30 +2512,28 @@ function toggleMusic(){
 
     if(music.paused){
 
-        music.play()
-        .then(function(){
+        music.play();
 
-            button.textContent="❚❚";
+        floating.textContent="❚❚";
 
-            if(circle){
-                circle.textContent="❚❚";
-            }
+        if(circle){
 
-        })
-        .catch(function(error){
+            circle.textContent="❚❚";
 
-            console.log(error);
+        }
 
-        });
+    }
 
-    }else{
+    else{
 
         music.pause();
 
-        button.textContent="♪";
+        floating.textContent="♪";
 
         if(circle){
+
             circle.textContent="♪";
+
         }
 
     }
@@ -1736,12 +2541,15 @@ function toggleMusic(){
 }
 
 
+
 /* =====================================================
    CUENTA REGRESIVA
 ===================================================== */
 
 const eventDate =
-    new Date("November 14, 2026 21:00:00").getTime();
+    new Date(
+        "November 14, 2026 21:00:00"
+    ).getTime();
 
 
 function updateCountdown(){
@@ -1804,22 +2612,22 @@ function updateCountdown(){
 
 
     document.getElementById("days")
-        .textContent =
+    .textContent =
         String(days).padStart(2,"0");
 
 
     document.getElementById("hours")
-        .textContent =
+    .textContent =
         String(hours).padStart(2,"0");
 
 
     document.getElementById("minutes")
-        .textContent =
+    .textContent =
         String(minutes).padStart(2,"0");
 
 
     document.getElementById("seconds")
-        .textContent =
+    .textContent =
         String(seconds).padStart(2,"0");
 
 }
@@ -1831,6 +2639,7 @@ setInterval(
     updateCountdown,
     1000
 );
+
 
 
 /* =====================================================
@@ -1857,6 +2666,11 @@ function sendMessage(){
     }
 
 
+    /*
+       CAMBIAR ESTE NÚMERO
+       por el WhatsApp real.
+    */
+
     const phone =
         "5491100000000";
 
@@ -1881,8 +2695,9 @@ function sendMessage(){
 
 }
 
+
 </script>
+
 
 </body>
 </html>
-
