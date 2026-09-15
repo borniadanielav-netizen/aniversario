@@ -1,45 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>50 años · María & Juan</title>
+<title>María & Juan · 50 años</title>
 
-<meta name="description"
-content="50 años de amor, historias y momentos. María & Juan.">
+<meta name="description" content="50 años, una historia para celebrar. María & Juan.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* =====================================================
-   PALETA DE COLORES
-===================================================== */
-
 :root{
-
     --blue-light:#94AFC9;
     --blue-dark:#2F496E;
     --ivory:#F8F7F3;
     --beige:#C8B2A3;
-
     --white:#FFFFFF;
-
     --text:#2F496E;
     --soft:#71849A;
-
+    --line:rgba(47,73,110,.18);
 }
-
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
     margin:0;
@@ -52,15 +37,10 @@ html{
 }
 
 body{
-
     background:var(--ivory);
-
     color:var(--text);
-
     font-family:'Montserrat',sans-serif;
-
     overflow-x:hidden;
-
 }
 
 button,
@@ -68,2512 +48,1613 @@ a{
     font-family:inherit;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-
-/* =====================================================
+/* =========================
    PORTADA
-===================================================== */
+========================= */
 
 .cover{
-
     position:fixed;
-
     inset:0;
-
-    z-index:1000;
-
-    overflow:hidden;
-
-    background:
-        var(--blue-dark);
-
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
-
-}
-
-
-.cover.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
-}
-
-
-/* FOTO DE FONDO */
-
-.cover-photo{
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        url("foto-pareja.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
-    transform:scale(1.03);
-
-    filter:
-        saturate(.75)
-        contrast(.9);
-
-}
-
-
-/* capa azul transparente */
-
-.cover-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        linear-gradient(
-            to bottom,
-            rgba(47,73,110,.42),
-            rgba(248,247,243,.70) 55%,
-            rgba(248,247,243,.94)
-        );
-
-}
-
-
-/* capa extra para lectura */
-
-.cover-overlay::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        rgba(148,175,201,.18);
-
-}
-
-
-/* CONTENIDO */
-
-.cover-content{
-
-    position:relative;
-
-    z-index:10;
-
-    min-height:100vh;
-
-    width:100%;
-
-    max-width:650px;
-
-    margin:auto;
-
-    padding:
-        35px 25px 45px;
+    z-index:9999;
 
     display:flex;
-
-    flex-direction:column;
-
+    align-items:center;
     justify-content:center;
 
-    align-items:center;
+    background:
+        linear-gradient(
+            rgba(47,73,110,.45),
+            rgba(47,73,110,.65)
+        ),
+        url("foto-pareja.jpg") center center / cover no-repeat;
 
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.cover::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(248,247,243,.10),
+            rgba(47,73,110,.55)
+        );
+}
+
+.cover.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.cover-content{
+    position:relative;
+    z-index:2;
+
+    width:min(90%,700px);
     text-align:center;
+    color:white;
 
+    padding:30px;
 }
-
-
-/* pequeño texto superior */
-
-.cover-top{
-
-    font-size:10px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    color:var(--white);
-
-    margin-bottom:20px;
-
-    text-shadow:
-        0 2px 12px rgba(0,0,0,.25);
-
-}
-
-
-/* NUMERO 50 */
 
 .cover-number{
-
-    position:relative;
-
     font-family:'Cormorant Garamond',serif;
-
-    font-size:180px;
-
-    line-height:.75;
-
-    font-weight:300;
-
-    color:var(--white);
-
-    letter-spacing:-10px;
-
-    text-shadow:
-        0 3px 25px rgba(47,73,110,.30);
+    font-size:clamp(90px,18vw,170px);
+    line-height:.8;
+    font-weight:500;
+    margin-bottom:15px;
 
     opacity:0;
+    transform:translateY(90px);
 
-    transform:
-        translateY(25px)
-        scale(.92);
-
-    animation:
-        numberAppear 1.5s ease forwards;
-
+    animation:riseNumber 1.4s ease forwards;
 }
 
-
 .cover-number::before{
-
     content:"";
-
     position:absolute;
 
-    width:205px;
+    width:150px;
+    height:150px;
 
-    height:205px;
-
-    border:1px solid rgba(255,255,255,.75);
-
+    border:1px solid rgba(255,255,255,.7);
     border-radius:50%;
 
     left:50%;
-
     top:50%;
 
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-58%);
 }
-
-
-@keyframes numberAppear{
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-/* línea */
-
-.cover-line{
-
-    width:80px;
-
-    height:1px;
-
-    background:rgba(255,255,255,.8);
-
-    margin:32px 0 20px;
-
-}
-
-
-/* nombres */
 
 .cover-names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(42px,8vw,72px);
+    font-weight:500;
+    line-height:1;
+
+    opacity:0;
+    transform:translateY(80px);
+
+    animation:riseText 1.2s ease .35s forwards;
+}
+
+.cover-phrase{
+    max-width:560px;
+    margin:24px auto 34px;
+
+    font-size:13px;
+    line-height:1.9;
+    letter-spacing:2px;
+    font-weight:300;
+
+    opacity:0;
+    transform:translateY(60px);
+
+    animation:riseText 1.2s ease .6s forwards;
+}
+
+.open-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:210px;
+    padding:15px 28px;
+
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:50px;
+
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+
+    color:white;
+
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    opacity:0;
+    transform:translateY(50px);
+
+    animation:riseText 1.2s ease .85s forwards;
+}
+
+.open-button:hover{
+    background:white;
+    color:var(--blue-dark);
+}
+
+@keyframes riseNumber{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes riseText{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.invitation{
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 1s ease;
+}
+
+.invitation.show{
+    opacity:1;
+    visibility:visible;
+}
+
+/* =========================
+   BOTÓN MÚSICA
+========================= */
+
+.music-button{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:50px;
+    height:50px;
+
+    z-index:1000;
+
+    border:1px solid rgba(47,73,110,.25);
+    border-radius:50%;
+
+    background:rgba(248,247,243,.92);
+    backdrop-filter:blur(8px);
+
+    color:var(--blue-dark);
+
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 25px rgba(47,73,110,.15);
+
+    transition:.3s;
+}
+
+.music-button:hover{
+    transform:scale(1.05);
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+section{
+    padding:90px 20px;
+}
+
+.container{
+    width:min(1100px,100%);
+    margin:auto;
+}
+
+.section-label{
+    text-align:center;
+
+    font-size:10px;
+    font-weight:500;
+    letter-spacing:4px;
+    text-transform:uppercase;
+
+    color:var(--soft);
+
+    margin-bottom:15px;
+}
+
+.section-title{
+    text-align:center;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:47px;
-
+    font-size:clamp(40px,6vw,65px);
     line-height:1;
 
     font-weight:500;
 
-    color:var(--white);
-
-    text-shadow:
-        0 3px 18px rgba(47,73,110,.35);
-
+    margin-bottom:20px;
 }
 
+.section-text{
+    max-width:650px;
 
-/* texto */
-
-.cover-message{
-
-    max-width:400px;
-
-    margin-top:20px;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:24px;
-
-    line-height:1.35;
-
-    color:var(--white);
-
-    text-shadow:
-        0 2px 15px rgba(47,73,110,.35);
-
-}
-
-
-/* BOTON */
-
-.open-btn{
-
-    margin-top:32px;
-
-    padding:16px 32px;
-
-    border-radius:50px;
-
-    border:1px solid rgba(255,255,255,.8);
-
-    background:
-        rgba(47,73,110,.78);
-
-    color:white;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    transition:.4s;
-
-    backdrop-filter:blur(8px);
-
-    box-shadow:
-        0 10px 30px rgba(47,73,110,.25);
-
-}
-
-
-.open-btn:hover{
-
-    background:var(--blue-dark);
-
-    transform:
-        translateY(-3px);
-
-}
-
-
-/* =====================================================
-   DESTELLOS
-===================================================== */
-
-.sparkle{
-
-    position:absolute;
-
-    color:white;
-
-    font-size:17px;
-
-    opacity:.7;
-
-    animation:
-        sparkle 3s infinite ease-in-out;
-
-}
-
-
-.sparkle.one{
-
-    top:20%;
-
-    left:18%;
-
-}
-
-
-.sparkle.two{
-
-    top:27%;
-
-    right:18%;
-
-    animation-delay:.7s;
-
-}
-
-
-.sparkle.three{
-
-    bottom:24%;
-
-    left:22%;
-
-    animation-delay:1.4s;
-
-}
-
-
-.sparkle.four{
-
-    bottom:20%;
-
-    right:25%;
-
-    animation-delay:2s;
-
-}
-
-
-@keyframes sparkle{
-
-    0%,100%{
-
-        opacity:.2;
-
-        transform:scale(.7);
-
-    }
-
-    50%{
-
-        opacity:1;
-
-        transform:scale(1.3);
-
-    }
-
-}
-
-
-/* =====================================================
-   INVITACIÓN
-===================================================== */
-
-.invitation{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:opacity 1s ease;
-
-}
-
-
-.invitation.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
+    margin:0 auto 50px;
 
     text-align:center;
 
-    padding:80px 20px;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(148,175,201,.22),
-            transparent 40%
-        ),
-
-        var(--ivory);
-
-    position:relative;
-
-}
-
-
-.hero-small{
-
-    font-size:10px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
+    font-size:13px;
+    line-height:2;
 
     color:var(--soft);
-
 }
 
+/* =========================
+   INTRO
+========================= */
 
-.hero-number{
+.intro{
+    min-height:90vh;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            rgba(248,247,243,.92),
+            rgba(248,247,243,.96)
+        );
+}
+
+.intro-number{
     font-family:'Cormorant Garamond',serif;
 
-    font-size:180px;
+    font-size:130px;
+    line-height:.7;
 
-    font-weight:300;
+    color:var(--blue-light);
 
-    line-height:.75;
-
-    color:var(--blue-dark);
-
-    margin:40px 0 25px;
-
-    position:relative;
-
+    margin-bottom:25px;
 }
 
+.intro-names{
+    font-family:'Cormorant Garamond',serif;
 
-.hero-number::after{
+    font-size:clamp(48px,8vw,85px);
 
+    font-weight:500;
+
+    margin-bottom:25px;
+}
+
+.intro-line{
+    width:80px;
+    height:1px;
+
+    background:var(--beige);
+
+    margin:25px auto;
+}
+
+.intro-description{
+    max-width:600px;
+    margin:auto;
+
+    font-size:13px;
+    line-height:2;
+
+    color:var(--soft);
+}
+
+/* =========================
+   EVENTO
+========================= */
+
+.event-section{
+    background:var(--blue-light);
+    color:white;
+}
+
+.event-section .section-label{
+    color:rgba(255,255,255,.75);
+}
+
+.event-section .section-text{
+    color:rgba(255,255,255,.85);
+}
+
+.event-section .section-title{
+    color:white;
+}
+
+.event-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:25px;
+
+    max-width:950px;
+    margin:auto;
+}
+
+.event-card{
+    padding:35px 20px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,.35);
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(8px);
+}
+
+.event-icon{
+    position:relative;
+
+    width:32px;
+    height:32px;
+
+    margin:0 auto 20px;
+}
+
+/* CALENDARIO */
+
+.icon-calendar{
+    border:1.5px solid white;
+    border-radius:4px;
+}
+
+.icon-calendar::before{
     content:"";
 
     position:absolute;
 
-    width:210px;
+    left:0;
+    right:0;
+    top:8px;
 
-    height:210px;
-
-    border:1px solid var(--blue-light);
-
-    border-radius:50%;
-
-    left:50%;
-
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
+    border-top:1.5px solid white;
 }
 
-
-.hero h1{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:52px;
-
-    font-weight:500;
-
-    color:var(--blue-dark);
-
-}
-
-
-.hero p{
-
-    max-width:500px;
-
-    margin-top:18px;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:25px;
-
-    line-height:1.45;
-
-    color:var(--soft);
-
-}
-
-
-.scroll{
+.icon-calendar::after{
+    content:"";
 
     position:absolute;
 
-    bottom:30px;
+    width:5px;
+    height:5px;
+
+    border-left:1.5px solid white;
+    border-top:1.5px solid white;
+
+    left:7px;
+    top:14px;
+}
+
+/* RELOJ */
+
+.icon-clock{
+    border:1.5px solid white;
+    border-radius:50%;
+}
+
+.icon-clock::before{
+    content:"";
+
+    position:absolute;
+
+    width:1.5px;
+    height:9px;
+
+    background:white;
+
+    left:14px;
+    top:6px;
+}
+
+.icon-clock::after{
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+    height:1.5px;
+
+    background:white;
+
+    left:14px;
+    top:15px;
+
+    transform:rotate(30deg);
+    transform-origin:left center;
+}
+
+/* UBICACIÓN */
+
+.icon-location{
+    border:1.5px solid white;
+
+    width:23px;
+    height:23px;
+
+    border-radius:50% 50% 50% 0;
+
+    transform:rotate(-45deg);
+
+    margin-top:4px;
+}
+
+.icon-location::after{
+    content:"";
+
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border:1px solid white;
+    border-radius:50%;
+
+    left:7px;
+    top:7px;
+}
+
+.event-title{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:27px;
+
+    margin-bottom:10px;
+}
+
+.event-info{
+    font-size:12px;
+
+    line-height:1.8;
+
+    color:rgba(255,255,255,.9);
+}
+
+.event-button{
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:10px 18px;
+
+    border:1px solid rgba(255,255,255,.6);
+    border-radius:30px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+}
+
+.event-button:hover{
+    background:white;
+    color:var(--blue-dark);
+}
+
+/* =========================
+   CUENTA REGRESIVA
+========================= */
+
+.countdown-section{
+    background:white;
+}
+
+.countdown{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    max-width:850px;
+
+    margin:50px auto 0;
+
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.count-item{
+    text-align:center;
+
+    padding:35px 10px;
+
+    border-right:1px solid var(--line);
+}
+
+.count-item:last-child{
+    border-right:none;
+}
+
+.count-number{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:55px;
+
+    color:var(--blue-dark);
+}
+
+.count-label{
+    margin-top:5px;
 
     font-size:9px;
 
     letter-spacing:3px;
 
-    text-transform:uppercase;
-
     color:var(--soft);
-
 }
 
+/* =========================
+   HISTORIA
+========================= */
 
-/* =====================================================
-   SECCIONES
-===================================================== */
-
-section{
-
-    padding:90px 20px;
-
+.story{
+    background:#F3F1EC;
 }
-
-
-.section-inner{
-
-    width:100%;
-
-    max-width:900px;
-
-    margin:auto;
-
-}
-
-
-.section-title{
-
-    text-align:center;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:48px;
-
-    font-weight:500;
-
-    color:var(--blue-dark);
-
-    margin-bottom:15px;
-
-}
-
-
-.section-subtitle{
-
-    max-width:600px;
-
-    margin:
-        0 auto 50px;
-
-    text-align:center;
-
-    color:var(--soft);
-
-    font-size:13px;
-
-    line-height:1.8;
-
-}
-
-
-/* =====================================================
-   EVENTO
-===================================================== */
-
-.event-section{
-
-    background:var(--white);
-
-}
-
-
-.event-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-
-}
-
-
-.event-card{
-
-    padding:35px 20px;
-
-    text-align:center;
-
-    background:var(--ivory);
-
-    border:
-        1px solid
-        rgba(148,175,201,.35);
-
-    border-radius:6px;
-
-    transition:.3s;
-
-}
-
-
-.event-card:hover{
-
-    transform:
-        translateY(-5px);
-
-}
-
-
-.event-icon{
-
-    font-size:25px;
-
-    color:var(--blue-light);
-
-    margin-bottom:15px;
-
-}
-
-
-.event-card h3{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:27px;
-
-    color:var(--blue-dark);
-
-    margin-bottom:10px;
-
-}
-
-
-.event-card p{
-
-    color:var(--soft);
-
-    font-size:12px;
-
-    line-height:1.7;
-
-}
-
-
-/* =====================================================
-   BOTONES
-===================================================== */
-
-.buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-    margin-top:35px;
-
-}
-
-
-.btn{
-
-    display:inline-block;
-
-    padding:14px 24px;
-
-    border:
-        1px solid
-        var(--blue-light);
-
-    border-radius:50px;
-
-    font-size:10px;
-
-    letter-spacing:1.5px;
-
-    text-transform:uppercase;
-
-    color:var(--blue-dark);
-
-    transition:.3s;
-
-}
-
-
-.btn:hover{
-
-    background:var(--blue-dark);
-
-    color:white;
-
-}
-
-
-/* =====================================================
-   CUENTA REGRESIVA
-===================================================== */
-
-.countdown{
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #E9EEF3,
-            var(--ivory)
-        );
-
-    text-align:center;
-
-}
-
-
-.countdown-box{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-}
-
-
-.time{
-
-    min-width:105px;
-
-    padding:23px 15px;
-
-    background:
-        rgba(255,255,255,.75);
-
-    border:
-        1px solid
-        rgba(148,175,201,.3);
-
-}
-
-
-.time span{
-
-    display:block;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:43px;
-
-    color:var(--blue-dark);
-
-}
-
-
-.time small{
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    color:var(--soft);
-
-    text-transform:uppercase;
-
-}
-
-
-/* =====================================================
-   RECUERDOS
-===================================================== */
-
-.memories{
-
-    background:var(--white);
-
-}
-
 
 .timeline{
+    max-width:800px;
+
+    margin:60px auto 0;
 
     position:relative;
-
-    max-width:700px;
-
-    margin:50px auto 0;
-
 }
 
-
 .timeline::before{
-
     content:"";
 
     position:absolute;
 
-    top:0;
-
-    bottom:0;
-
     left:50%;
+
+    top:0;
+    bottom:0;
 
     width:1px;
 
-    background:var(--blue-light);
-
-    transform:
-        translateX(-50%);
-
+    background:var(--beige);
 }
 
-
 .timeline-item{
+    position:relative;
 
     width:50%;
 
-    padding:20px 35px;
-
-    position:relative;
-
+    padding:0 45px 55px;
 }
-
-
-.timeline-item:nth-child(odd){
-
-    text-align:right;
-
-}
-
 
 .timeline-item:nth-child(even){
-
     margin-left:50%;
-
 }
 
-
-.timeline-dot{
+.timeline-item::before{
+    content:"";
 
     position:absolute;
 
-    top:30px;
+    top:5px;
 
-    width:12px;
+    width:10px;
+    height:10px;
 
-    height:12px;
+    border:2px solid var(--blue-dark);
+
+    background:var(--ivory);
 
     border-radius:50%;
 
-    background:var(--beige);
-
-    border:
-        3px solid
-        var(--ivory);
-
+    z-index:2;
 }
 
-
-.timeline-item:nth-child(odd)
-.timeline-dot{
-
+.timeline-item:nth-child(odd)::before{
     right:-6px;
-
 }
 
-
-.timeline-item:nth-child(even)
-.timeline-dot{
-
+.timeline-item:nth-child(even)::before{
     left:-6px;
-
 }
-
 
 .timeline-year{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:31px;
-
-    color:var(--blue-dark);
-
-}
-
-
-.timeline-item p{
-
-    margin-top:5px;
-
-    font-size:12px;
-
-    line-height:1.7;
-
-    color:var(--soft);
-
-}
-
-
-/* =====================================================
-   GALERÍA
-===================================================== */
-
-.gallery{
-
-    background:var(--ivory);
-
-}
-
-
-.gallery-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:14px;
-
-}
-
-
-.gallery-item{
-
-    aspect-ratio:1/1;
-
-    overflow:hidden;
-
-    background:var(--beige);
-
-    border-radius:5px;
-
-}
-
-
-.gallery-item img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-        transform .6s ease;
-
-}
-
-
-.gallery-item:hover img{
-
-    transform:scale(1.06);
-
-}
-
-
-/* =====================================================
-   MÚSICA
-===================================================== */
-
-.music-section{
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #E7EDF3,
-            #F8F7F3
-        );
-
-    text-align:center;
-
-}
-
-
-.music-circle{
-
-    width:115px;
-
-    height:115px;
-
-    margin:35px auto;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        var(--blue-light);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:30px;
-
-    color:var(--blue-dark);
-
-    cursor:pointer;
-
-    background:
-        rgba(255,255,255,.7);
-
-    transition:.4s;
-
-}
-
-
-.music-circle:hover{
-
-    transform:scale(1.06);
-
-    background:var(--blue-light);
-
-    color:white;
-
-}
-
-
-.music-note{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:22px;
-
-    color:var(--soft);
-
-}
-
-
-/* =====================================================
-   MENSAJE
-===================================================== */
-
-.message-section{
-
-    background:var(--white);
-
-}
-
-
-.message-box{
-
-    max-width:650px;
-
-    margin:auto;
-
-}
-
-
-.message-box textarea{
-
-    width:100%;
-
-    min-height:140px;
-
-    resize:vertical;
-
-    padding:18px;
-
-    border:
-        1px solid
-        rgba(148,175,201,.45);
-
-    background:var(--ivory);
-
-    color:var(--text);
-
-    font-family:'Montserrat',sans-serif;
-
-    outline:none;
-
-    border-radius:5px;
-
-}
-
-
-.message-box textarea:focus{
-
-    border-color:
-        var(--blue-light);
-
-}
-
-
-.send-message{
-
-    margin-top:15px;
-
-    padding:14px 24px;
-
-    border:
-        1px solid
-        var(--blue-light);
-
-    border-radius:50px;
-
-    background:transparent;
-
-    color:var(--blue-dark);
-
-    cursor:pointer;
-
-    font-size:10px;
-
-    letter-spacing:1.5px;
-
-    text-transform:uppercase;
-
-}
-
-
-/* =====================================================
-   CIERRE
-===================================================== */
-
-.closing{
-
-    min-height:75vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    background:
-
-        radial-gradient(
-            circle at center,
-            rgba(148,175,201,.22),
-            transparent 45%
-        ),
-
-        var(--ivory);
-
-}
-
-
-.closing-inner{
-
-    max-width:650px;
-
-}
-
-
-.closing-number{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:120px;
-
-    font-weight:300;
-
-    line-height:1;
-
-    color:var(--blue-dark);
-
-}
-
-
-.closing h2{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:43px;
-
-    font-weight:500;
-
-    margin:20px 0;
-
-    color:var(--blue-dark);
-
-}
-
-
-.closing p{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:24px;
-
-    line-height:1.5;
-
-    color:var(--soft);
-
-}
-
-
-.names{
-
-    margin-top:30px;
-
     font-family:'Cormorant Garamond',serif;
 
     font-size:40px;
 
     color:var(--blue-dark);
 
+    margin-bottom:8px;
 }
 
+.timeline-text{
+    font-size:12px;
 
-/* =====================================================
-   FOOTER
-===================================================== */
+    line-height:1.8;
 
-footer{
+    color:var(--soft);
+}
 
-    padding:25px;
+/* =========================
+   GALERÍA
+========================= */
+
+.gallery{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    max-width:1000px;
+
+    margin:50px auto 0;
+}
+
+.gallery img{
+    width:100%;
+    height:330px;
+
+    object-fit:cover;
+
+    display:block;
+
+    filter:saturate(.8);
+
+    transition:.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.02);
+    filter:saturate(1);
+}
+
+/* =========================
+   CONFIRMACIÓN
+========================= */
+
+.rsvp{
+    background:var(--blue-dark);
+    color:white;
 
     text-align:center;
+}
 
-    background:var(--blue-dark);
+.rsvp .section-label{
+    color:rgba(255,255,255,.7);
+}
+
+.rsvp .section-title{
+    color:white;
+}
+
+.rsvp .section-text{
+    color:rgba(255,255,255,.8);
+}
+
+.rsvp-button{
+    display:inline-block;
+
+    padding:16px 35px;
+
+    border:1px solid rgba(255,255,255,.7);
+
+    border-radius:50px;
 
     color:white;
 
-    font-size:9px;
+    text-decoration:none;
 
-    letter-spacing:2px;
+    font-size:10px;
 
-    text-transform:uppercase;
+    letter-spacing:3px;
 
+    transition:.3s;
 }
 
+.rsvp-button:hover{
+    background:white;
+    color:var(--blue-dark);
+}
 
-/* =====================================================
-   BOTÓN MÚSICA
-===================================================== */
+/* =========================
+   CIERRE
+========================= */
 
-.music-floating{
+.closing{
+    min-height:90vh;
 
-    position:fixed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    right:20px;
-
-    bottom:20px;
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        var(--blue-light);
+    text-align:center;
 
     background:
-        rgba(248,247,243,.94);
+        linear-gradient(
+            rgba(248,247,243,.95),
+            rgba(248,247,243,.98)
+        );
+}
+
+.closing-content{
+    max-width:700px;
+}
+
+.closing-number{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:120px;
+
+    color:var(--blue-light);
+
+    line-height:.8;
+
+    margin-bottom:30px;
+}
+
+.closing-main{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(38px,6vw,65px);
+
+    line-height:1.1;
+
+    margin-bottom:25px;
+}
+
+.closing-small{
+    font-size:12px;
+
+    color:var(--soft);
+
+    line-height:2;
+
+    max-width:500px;
+
+    margin:0 auto;
+}
+
+.closing-names{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:40px;
+
+    margin-top:35px;
+}
+
+.ivory-box{
+    margin:55px auto 0;
+
+    padding:30px;
+
+    max-width:550px;
+
+    border-top:1px solid var(--beige);
+    border-bottom:1px solid var(--beige);
+}
+
+.ivory-brand{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:30px;
+
+    letter-spacing:3px;
+
+    margin-bottom:10px;
+}
+
+.ivory-text{
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    line-height:2;
+
+    color:var(--soft);
+}
+
+.instagram{
+    display:inline-block;
+
+    margin-top:18px;
 
     color:var(--blue-dark);
 
-    z-index:500;
+    text-decoration:none;
 
-    cursor:pointer;
+    font-size:12px;
 
-    font-size:20px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(47,73,110,.15);
-
+    letter-spacing:2px;
 }
 
+.footer{
+    margin-top:50px;
 
-/* =====================================================
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:var(--soft);
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+.fade-in{
+    animation:fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
    RESPONSIVE
-===================================================== */
+========================= */
 
 @media(max-width:700px){
 
+    section{
+        padding:70px 18px;
+    }
+
     .cover-content{
-
-        padding:
-            30px 20px 40px;
-
+        padding:20px;
     }
-
-
-    .cover-top{
-
-        font-size:9px;
-
-        letter-spacing:4px;
-
-    }
-
 
     .cover-number{
-
-        font-size:135px;
-
+        font-size:105px;
     }
-
 
     .cover-number::before{
-
-        width:160px;
-
-        height:160px;
-
+        width:115px;
+        height:115px;
     }
-
 
     .cover-names{
-
-        font-size:39px;
-
+        font-size:47px;
     }
 
-
-    .cover-message{
-
-        font-size:21px;
-
-        max-width:330px;
-
+    .cover-phrase{
+        font-size:11px;
+        line-height:1.8;
     }
-
-
-    .hero-number{
-
-        font-size:145px;
-
-    }
-
-
-    .hero-number::after{
-
-        width:175px;
-
-        height:175px;
-
-    }
-
-
-    .hero h1{
-
-        font-size:42px;
-
-    }
-
-
-    .hero p{
-
-        font-size:21px;
-
-    }
-
-
-    .section-title{
-
-        font-size:40px;
-
-    }
-
 
     .event-grid{
-
         grid-template-columns:1fr;
 
+        max-width:380px;
     }
 
+    .event-card{
+        padding:30px 20px;
+    }
 
-    .gallery-grid{
+    .countdown{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
 
+    .count-item{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+    }
+
+    .count-item:nth-child(odd){
+        border-right:1px solid var(--line);
+    }
+
+    .count-item:nth-child(3),
+    .count-item:nth-child(4){
+        border-bottom:none;
+    }
+
+    .count-number{
+        font-size:45px;
+    }
+
+    .timeline::before{
+        left:8px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+        width:100%;
+
+        margin-left:0;
+
+        padding:
+            0 0 45px
+            40px;
+    }
+
+    .timeline-item::before,
+    .timeline-item:nth-child(odd)::before,
+    .timeline-item:nth-child(even)::before{
+        left:3px;
+        right:auto;
+    }
+
+    .gallery{
         grid-template-columns:
             repeat(2,1fr);
 
+        gap:8px;
     }
 
-
-    .timeline::before{
-
-        left:15px;
-
+    .gallery img{
+        height:220px;
     }
-
-
-    .timeline-item{
-
-        width:100%;
-
-        margin-left:0 !important;
-
-        padding-left:45px;
-
-        padding-right:10px;
-
-        text-align:left !important;
-
-    }
-
-
-    .timeline-item:nth-child(odd)
-    .timeline-dot,
-    .timeline-item:nth-child(even)
-    .timeline-dot{
-
-        left:9px;
-
-        right:auto;
-
-    }
-
 
     .closing-number{
-
-        font-size:90px;
-
+        font-size:95px;
     }
 
-
-    .closing h2{
-
-        font-size:35px;
-
-    }
-
-
-    .closing p{
-
-        font-size:21px;
-
-    }
-
-
-    .names{
-
+    .closing-names{
         font-size:34px;
-
     }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =========================
+     MÚSICA
+========================= -->
 
-<!-- =====================================================
+<audio id="backgroundMusic" preload="auto" loop>
+    <source src="romantico.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music-button"
+    id="musicButton"
+    onclick="toggleMusic()"
+    aria-label="Reproducir música">
+    PLAY
+</button>
+
+
+<!-- =========================
      PORTADA
-===================================================== -->
+========================= -->
 
-<div
-    class="cover"
-    id="cover">
-
-
-    <!-- FOTO DE MARÍA Y JUAN -->
-
-    <div class="cover-photo"></div>
-
-
-    <!-- TRANSPARENCIA SOBRE LA FOTO -->
-
-    <div class="cover-overlay"></div>
-
-
-    <!-- DESTELLOS -->
-
-    <div class="sparkle one">✦</div>
-
-    <div class="sparkle two">✧</div>
-
-    <div class="sparkle three">✦</div>
-
-    <div class="sparkle four">✧</div>
-
-
-    <!-- CONTENIDO -->
+<div class="cover" id="cover">
 
     <div class="cover-content">
 
-
-        <div class="cover-top">
-
-            50 años de amor
-
-        </div>
-
-
         <div class="cover-number">
-
             50
-
         </div>
-
-
-        <div class="cover-line"></div>
-
 
         <div class="cover-names">
-
             María & Juan
-
         </div>
 
-
-        <p class="cover-message">
-
-            Una vida compartida,
-            miles de recuerdos
-            y una historia que merece celebrarse.
-
-        </p>
-
+        <div class="cover-phrase">
+            Una historia de amor, una vida compartida
+            y muchos recuerdos para celebrar.
+        </div>
 
         <button
-            class="open-btn"
+            class="open-button"
             onclick="openInvitation()">
-
-            ABRIR INVITACIÓN ✨
-
+            ABRIR INVITACIÓN
         </button>
-
 
     </div>
 
 </div>
 
 
-
-<!-- =====================================================
+<!-- =========================
      INVITACIÓN
-===================================================== -->
+========================= -->
 
-<main
-    class="invitation"
-    id="invitation">
+<main class="invitation" id="invitation">
 
 
-    <!-- HERO -->
+<!-- INTRO -->
 
-    <section class="hero">
+<section class="intro">
 
+    <div class="container">
 
-        <div class="hero-small">
-
-            Una vida compartida
-
-        </div>
-
-
-        <div class="hero-number">
-
+        <div class="intro-number">
             50
-
         </div>
 
-
-        <h1>
-
+        <div class="intro-names">
             María & Juan
+        </div>
 
-        </h1>
+        <div class="intro-line"></div>
+
+        <p class="intro-description">
+            Cincuenta años de una historia construida
+            con amor, familia, momentos compartidos
+            y recuerdos que siguen creciendo con el tiempo.
+        </p>
+
+    </div>
+
+</section>
 
 
-        <p>
+<!-- EVENTO -->
 
-            50 años de amor,
-            historias y momentos
-            que merecen ser celebrados.
+<section class="event-section">
 
+    <div class="container">
+
+        <div class="section-label">
+            Una fecha para recordar
+        </div>
+
+        <h2 class="section-title">
+            Celebramos juntos
+        </h2>
+
+        <p class="section-text">
+            Queremos compartir esta noche tan especial
+            con las personas que fueron parte de nuestra historia.
         </p>
 
 
-        <div class="scroll">
-
-            Deslizá para descubrir
-
-        </div>
+        <div class="event-grid">
 
 
-    </section>
+            <!-- FECHA -->
 
+            <div class="event-card">
 
+                <div class="event-icon icon-calendar"></div>
 
-    <!-- =================================================
-         EVENTO
-    ================================================= -->
-
-    <section class="event-section">
-
-
-        <div class="section-inner">
-
-
-            <h2 class="section-title">
-
-                Una fecha para recordar
-
-            </h2>
-
-
-            <p class="section-subtitle">
-
-                Queremos compartir con vos una noche muy especial
-                para celebrar cinco décadas de amor y de vida compartida.
-
-            </p>
-
-
-            <div class="event-grid">
-
-
-                <div class="event-card">
-
-
-                    <div class="event-icon">
-
-                        ♡
-
-                    </div>
-
-
-                    <h3>
-
-                        Sábado
-
-                    </h3>
-
-
-                    <p>
-
-                        14 de noviembre<br>
-                        2026
-
-                    </p>
-
-
+                <div class="event-title">
+                    Fecha
                 </div>
 
-
-
-                <div class="event-card">
-
-
-                    <div class="event-icon">
-
-                        ◷
-
-                    </div>
-
-
-                    <h3>
-
-                        21:00 hs.
-
-                    </h3>
-
-
-                    <p>
-
-                        Te esperamos para
-                        compartir una noche inolvidable.
-
-                    </p>
-
-
+                <div class="event-info">
+                    Sábado<br>
+                    14 de noviembre de 2026
                 </div>
-
-
-
-                <div class="event-card">
-
-
-                    <div class="event-icon">
-
-                        ⌂
-
-                    </div>
-
-
-                    <h3>
-
-                        Salón Los Olivos
-
-                    </h3>
-
-
-                    <p>
-
-                        Lugar del evento
-
-                    </p>
-
-
-                </div>
-
 
             </div>
 
 
+            <!-- HORA -->
 
-            <div class="buttons">
+            <div class="event-card">
 
+                <div class="event-icon icon-clock"></div>
+
+                <div class="event-title">
+                    Hora
+                </div>
+
+                <div class="event-info">
+                    21:00 hs<br>
+                    Los esperamos
+                </div>
+
+            </div>
+
+
+            <!-- LUGAR -->
+
+            <div class="event-card">
+
+                <div class="event-icon icon-location"></div>
+
+                <div class="event-title">
+                    Lugar
+                </div>
+
+                <div class="event-info">
+                    Salón Los Olivos
+                </div>
+
+                <!-- REEMPLAZAR LINK -->
 
                 <a
-                    class="btn"
                     href="https://maps.google.com/"
-                    target="_blank">
-
-                    Ver ubicación
-
+                    target="_blank"
+                    class="event-button">
+                    VER UBICACIÓN
                 </a>
 
-
-                <a
-                    class="btn"
-                    href="https://wa.me/5491100000000?text=Hola%20Mar%C3%ADa%20y%20Juan%2C%20quiero%20confirmar%20mi%20asistencia%20a%20su%20aniversario%20de%2050%20a%C3%B1os.%20%F0%9F%A5%82"
-                    target="_blank">
-
-                    Confirmar asistencia
-
-                </a>
-
-
             </div>
-
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
+<!-- CUENTA REGRESIVA -->
 
-    <!-- =================================================
-         CUENTA REGRESIVA
-    ================================================= -->
+<section class="countdown-section">
 
-    <section class="countdown">
+    <div class="container">
 
+        <div class="section-label">
+            Falta cada vez menos
+        </div>
 
-        <div class="section-inner">
+        <h2 class="section-title">
+            La cuenta regresiva
+        </h2>
 
-
-            <h2 class="section-title">
-
-                Falta muy poquito
-
-            </h2>
-
-
-            <p class="section-subtitle">
-
-                Estamos contando los días para volver a celebrar
-                juntos una historia de amor que ya lleva 50 años.
-
-            </p>
+        <p class="section-text">
+            Nos encontramos para celebrar cinco décadas
+            de una historia que merece ser recordada.
+        </p>
 
 
-            <div class="countdown-box">
+        <div class="countdown">
 
-
-                <div class="time">
-
-                    <span id="days">
-                        00
-                    </span>
-
-                    <small>
-                        Días
-                    </small>
-
+            <div class="count-item">
+                <div
+                    class="count-number"
+                    id="days">
+                    00
                 </div>
 
-
-                <div class="time">
-
-                    <span id="hours">
-                        00
-                    </span>
-
-                    <small>
-                        Horas
-                    </small>
-
+                <div class="count-label">
+                    DÍAS
                 </div>
-
-
-                <div class="time">
-
-                    <span id="minutes">
-                        00
-                    </span>
-
-                    <small>
-                        Minutos
-                    </small>
-
-                </div>
-
-
-                <div class="time">
-
-                    <span id="seconds">
-                        00
-                    </span>
-
-                    <small>
-                        Segundos
-                    </small>
-
-                </div>
-
-
             </div>
 
+
+            <div class="count-item">
+                <div
+                    class="count-number"
+                    id="hours">
+                    00
+                </div>
+
+                <div class="count-label">
+                    HORAS
+                </div>
+            </div>
+
+
+            <div class="count-item">
+                <div
+                    class="count-number"
+                    id="minutes">
+                    00
+                </div>
+
+                <div class="count-label">
+                    MINUTOS
+                </div>
+            </div>
+
+
+            <div class="count-item">
+                <div
+                    class="count-number"
+                    id="seconds">
+                    00
+                </div>
+
+                <div class="count-label">
+                    SEGUNDOS
+                </div>
+            </div>
 
         </div>
 
+    </div>
 
-    </section>
-
-
-
-    <!-- =================================================
-         RECUERDOS
-    ================================================= -->
-
-    <section class="memories">
+</section>
 
 
-        <div class="section-inner">
+<!-- HISTORIA -->
+
+<section class="story">
+
+    <div class="container">
+
+        <div class="section-label">
+            Nuestra historia
+        </div>
+
+        <h2 class="section-title">
+            Una vida compartida
+        </h2>
+
+        <p class="section-text">
+            Cinco décadas, innumerables recuerdos
+            y muchos capítulos que todavía quedan por escribir.
+        </p>
 
 
-            <h2 class="section-title">
-
-                50 años · 50 recuerdos
-
-            </h2>
+        <div class="timeline">
 
 
-            <p class="section-subtitle">
+            <div class="timeline-item">
 
-                Una pequeña parte de una historia llena de
-                momentos, sueños, desafíos y mucho amor.
-
-            </p>
-
-
-            <div class="timeline">
-
-
-                <div class="timeline-item">
-
-
-                    <div class="timeline-dot"></div>
-
-
-                    <div class="timeline-year">
-
-                        1976
-
-                    </div>
-
-
-                    <p>
-
-                        El comienzo de una historia
-                        que cambiaría sus vidas para siempre.
-
-                    </p>
-
-
+                <div class="timeline-year">
+                    1976
                 </div>
 
-
-
-                <div class="timeline-item">
-
-
-                    <div class="timeline-dot"></div>
-
-
-                    <div class="timeline-year">
-
-                        1980
-
-                    </div>
-
-
-                    <p>
-
-                        Nuevos sueños,
-                        nuevos proyectos
-                        y una vida construida juntos.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="timeline-item">
-
-
-                    <div class="timeline-dot"></div>
-
-
-                    <div class="timeline-year">
-
-                        1990
-
-                    </div>
-
-
-                    <p>
-
-                        Una familia creciendo
-                        y cientos de recuerdos compartidos.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="timeline-item">
-
-
-                    <div class="timeline-dot"></div>
-
-
-                    <div class="timeline-year">
-
-                        2000
-
-                    </div>
-
-
-                    <p>
-
-                        Más historias,
-                        más aventuras
-                        y muchos momentos inolvidables.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="timeline-item">
-
-
-                    <div class="timeline-dot"></div>
-
-
-                    <div class="timeline-year">
-
-                        2026
-
-                    </div>
-
-
-                    <p>
-
-                        50 años después,
-                        seguimos celebrando el amor.
-
-                    </p>
-
-
-                </div>
-
+                <p class="timeline-text">
+                    El comienzo de una historia que cambiaría
+                    para siempre nuestras vidas.
+                </p>
 
             </div>
 
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+                    1980
+                </div>
+
+                <p class="timeline-text">
+                    Nuevos sueños, nuevos proyectos
+                    y momentos que comenzaron a construir
+                    nuestra vida juntos.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+                    1990
+                </div>
+
+                <p class="timeline-text">
+                    Una familia, nuevos recuerdos
+                    y muchos motivos para agradecer.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+                    2000
+                </div>
+
+                <p class="timeline-text">
+                    El tiempo pasó, pero el amor,
+                    las risas y las experiencias
+                    siguieron creciendo.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+                    2026
+                </div>
+
+                <p class="timeline-text">
+                    50 años después, nos reunimos
+                    para celebrar todo lo vivido
+                    y brindar por todo lo que viene.
+                </p>
+
+            </div>
 
         </div>
 
+    </div>
 
-    </section>
-
-
-
-    <!-- =================================================
-         GALERÍA
-    ================================================= -->
-
-    <section class="gallery">
+</section>
 
 
-        <div class="section-inner">
+<!-- GALERÍA -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-label">
+            Algunos recuerdos
+        </div>
+
+        <h2 class="section-title">
+            Momentos que quedan
+        </h2>
+
+        <p class="section-text">
+            Una pequeña colección de momentos
+            para acompañar esta celebración.
+        </p>
 
 
-            <h2 class="section-title">
+        <div class="gallery">
 
-                Algunos recuerdos
+            <img
+                src="https://images.pexels.com/photos/7911316/pexels-photo-7911316.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Momento especial">
 
-            </h2>
+            <img
+                src="https://images.pexels.com/photos/8420380/pexels-photo-8420380.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Celebración">
 
+            <img
+                src="https://images.pexels.com/photos/7911319/pexels-photo-7911319.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Pareja">
 
-            <p class="section-subtitle">
+            <img
+                src="https://images.pexels.com/photos/7911318/pexels-photo-7911318.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Recuerdo">
 
-                Porque una vida juntos está hecha
-                de pequeños momentos que se vuelven eternos.
+            <img
+                src="https://images.pexels.com/photos/7911046/pexels-photo-7911046.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Celebración familiar">
 
-            </p>
+            <img
+                src="https://images.pexels.com/photos/7867442/pexels-photo-7867442.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Momento compartido">
 
+        </div>
 
-            <div class="gallery-grid">
+    </div>
 
-
-                <div class="gallery-item">
-
-                    <img
-                    src="https://images.pexels.com/photos/7911316/pexels-photo-7911316.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Pareja celebrando aniversario">
-
-                </div>
-
-
-                <div class="gallery-item">
-
-                    <img
-                    src="https://images.pexels.com/photos/8420380/pexels-photo-8420380.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Pareja celebrando aniversario">
-
-                </div>
+</section>
 
 
-                <div class="gallery-item">
+<!-- RSVP -->
 
-                    <img
-                    src="https://images.pexels.com/photos/7911319/pexels-photo-7911319.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Pareja celebrando">
+<section class="rsvp">
 
-                </div>
+    <div class="container">
 
+        <div class="section-label">
+            Confirmación
+        </div>
 
-                <div class="gallery-item">
+        <h2 class="section-title">
+            ¿Nos acompañás?
+        </h2>
 
-                    <img
-                    src="https://images.pexels.com/photos/7911318/pexels-photo-7911318.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Aniversario">
-
-                </div>
-
-
-                <div class="gallery-item">
-
-                    <img
-                    src="https://images.pexels.com/photos/7911046/pexels-photo-7911046.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Celebración">
-
-                </div>
+        <p class="section-text">
+            Nos encantaría compartir esta noche
+            tan importante con vos.
+        </p>
 
 
-                <div class="gallery-item">
+        <!-- REEMPLAZAR NÚMERO DE WHATSAPP -->
 
-                    <img
-                    src="https://images.pexels.com/photos/7867442/pexels-photo-7867442.jpeg?auto=compress&cs=tinysrgb&w=900"
-                    alt="Bodas de oro">
+        <a
+            class="rsvp-button"
+            href="https://wa.me/5491100000000?text=Hola%20Mar%C3%ADa%20y%20Juan%2C%20quiero%20confirmar%20mi%20asistencia%20a%20sus%2050%20a%C3%B1os."
+            target="_blank">
 
-                </div>
+            CONFIRMAR ASISTENCIA
+
+        </a>
+
+    </div>
+
+</section>
 
 
-            </div>
+<!-- CIERRE -->
 
+<section class="closing">
+
+    <div class="closing-content">
+
+        <div class="closing-number">
+            50
+        </div>
+
+
+        <div class="closing-main">
+            Una vida.<br>
+            Una historia.<br>
+            Un gran amor.
+        </div>
+
+
+        <div class="closing-small">
+
+            50 años después… seguimos celebrando el amor.
 
         </div>
 
 
-    </section>
+        <div class="closing-names">
+            María & Juan
+        </div>
 
 
+        <div class="ivory-box">
 
-    <!-- =================================================
-         MÚSICA
-    ================================================= -->
+            <div class="ivory-brand">
+                IVORY
+            </div>
 
-    <section class="music-section">
+            <div class="ivory-text">
 
+                Porque las historias más lindas
+                merecen ser contadas de una manera especial.
 
-        <div class="section-inner">
+                <br>
 
-
-            <h2 class="section-title">
-
-                Nuestra canción
-
-            </h2>
-
-
-            <p class="section-subtitle">
-
-                Una melodía para acompañar este momento
-                y recordar todo lo vivido.
-
-            </p>
-
-
-            <div
-                class="music-circle"
-                id="musicCircle"
-                onclick="toggleMusic()">
-
-                ♪
+                Invitaciones digitales que cuentan historias.
 
             </div>
 
 
-            <div class="music-note">
+            <a
+                href="https://www.instagram.com/ivory.dd/"
+                target="_blank"
+                class="instagram">
 
-                Tocá para reproducir
+                @Ivory.dd
 
-            </div>
-
+            </a>
 
         </div>
 
 
-    </section>
+        <div class="footer">
 
-
-
-    <!-- =================================================
-         MENSAJE
-    ================================================= -->
-
-    <section class="message-section">
-
-
-        <div class="section-inner">
-
-
-            <h2 class="section-title">
-
-                Dejanos un mensaje
-
-            </h2>
-
-
-            <p class="section-subtitle">
-
-                Si querés, podés dejarles unas palabras
-                para María y Juan.
-
-            </p>
-
-
-            <div class="message-box">
-
-
-                <textarea
-                    id="guestMessage"
-                    placeholder="Escribí aquí tu mensaje..."></textarea>
-
-
-                <button
-                    class="send-message"
-                    onclick="sendMessage()">
-
-                    Enviar mensaje 💌
-
-                </button>
-
-
-            </div>
-
+            50 AÑOS · MARÍA & JUAN · 2026
 
         </div>
 
+    </div>
 
-    </section>
-
-
-
-    <!-- =================================================
-         CIERRE
-    ================================================= -->
-
-    <section class="closing">
-
-
-        <div class="closing-inner">
-
-
-            <div class="closing-number">
-
-                50
-
-            </div>
-
-
-            <h2>
-
-                Una vida.
-                Una historia.
-                Un gran amor.
-
-            </h2>
-
-
-            <p>
-
-                50 años después…
-                seguimos celebrando el amor.
-
-            </p>
-
-
-            <div class="names">
-
-                María & Juan
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-    <footer>
-
-        50 años · María & Juan · 2026
-
-    </footer>
-
+</section>
 
 </main>
 
 
-
-<!-- =====================================================
-     AUDIO
-===================================================== -->
-
-<audio
-    id="backgroundMusic"
-    loop
-    preload="auto">
-
-    <source
-        src="romantico.mp3"
-        type="audio/mpeg">
-
-</audio>
-
-
-
-<!-- BOTÓN FLOTANTE -->
-
-<button
-    class="music-floating"
-    id="floatingMusic"
-    onclick="toggleMusic()">
-
-    ♪
-
-</button>
-
-
-
 <script>
 
+/* =========================
+   ELEMENTOS
+========================= */
 
-/* =====================================================
-   ABRIR INVITACIÓN + MÚSICA DESDE EL PRINCIPIO
-===================================================== */
+const cover = document.getElementById("cover");
+const invitation = document.getElementById("invitation");
+
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
+
+/* =========================
+   ABRIR INVITACIÓN
+========================= */
 
 function openInvitation(){
-
-    const cover =
-        document.getElementById("cover");
-
-    const invitation =
-        document.getElementById("invitation");
-
-    const music =
-        document.getElementById("backgroundMusic");
-
-    const floating =
-        document.getElementById("floatingMusic");
-
-    const circle =
-        document.getElementById("musicCircle");
-
-
-    /*
-       MUY IMPORTANTE:
-       cada vez que se abre la invitación,
-       la canción vuelve al segundo 0.
-    */
 
     music.pause();
 
     music.currentTime = 0;
 
-
-    /*
-       Ocultamos portada
-    */
+    invitation.classList.add("show");
 
     cover.classList.add("hide");
 
-
-    /*
-       Mostramos invitación
-    */
-
-    invitation.classList.add("show");
-
-
-    /*
-       Comenzamos música
-    */
-
     music.play()
-    .then(function(){
+        .then(() => {
 
-        floating.textContent="❚❚";
+            musicButton.textContent = "PAUSE";
 
-        if(circle){
+        })
+        .catch(() => {
 
-            circle.textContent="❚❚";
+            musicButton.textContent = "PLAY";
 
-        }
-
-    })
-    .catch(function(){
-
-        console.log(
-            "El navegador bloqueó la reproducción automática."
-        );
-
-    });
-
-
-    /*
-       Volver arriba
-    */
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+        });
 
 }
 
 
-
-/* =====================================================
+/* =========================
    MÚSICA
-===================================================== */
+========================= */
 
 function toggleMusic(){
 
-    const music =
-        document.getElementById("backgroundMusic");
-
-    const floating =
-        document.getElementById("floatingMusic");
-
-    const circle =
-        document.getElementById("musicCircle");
-
-
     if(music.paused){
 
-        music.play();
+        music.play()
+            .then(() => {
 
-        floating.textContent="❚❚";
+                musicButton.textContent = "PAUSE";
 
-        if(circle){
+            });
 
-            circle.textContent="❚❚";
-
-        }
-
-    }
-
-    else{
+    }else{
 
         music.pause();
 
-        floating.textContent="♪";
-
-        if(circle){
-
-            circle.textContent="♪";
-
-        }
+        musicButton.textContent = "PLAY";
 
     }
 
 }
 
 
-
-/* =====================================================
+/* =========================
    CUENTA REGRESIVA
-===================================================== */
+========================= */
 
 const eventDate =
-    new Date(
-        "November 14, 2026 21:00:00"
-    ).getTime();
+    new Date("2026-11-14T21:00:00").getTime();
 
 
 function updateCountdown(){
 
-    const now =
-        new Date().getTime();
+    const now = new Date().getTime();
 
-    const difference =
-        eventDate - now;
+    const distance = eventDate - now;
 
 
-    if(difference <= 0){
+    if(distance <= 0){
 
-        document.getElementById("days")
-        .textContent="00";
-
-        document.getElementById("hours")
-        .textContent="00";
-
-        document.getElementById("minutes")
-        .textContent="00";
-
-        document.getElementById("seconds")
-        .textContent="00";
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
 
         return;
 
@@ -2582,14 +1663,14 @@ function updateCountdown(){
 
     const days =
         Math.floor(
-            difference /
+            distance /
             (1000 * 60 * 60 * 24)
         );
 
 
     const hours =
         Math.floor(
-            (difference %
+            (distance %
             (1000 * 60 * 60 * 24)) /
             (1000 * 60 * 60)
         );
@@ -2597,7 +1678,7 @@ function updateCountdown(){
 
     const minutes =
         Math.floor(
-            (difference %
+            (distance %
             (1000 * 60 * 60)) /
             (1000 * 60)
         );
@@ -2605,29 +1686,22 @@ function updateCountdown(){
 
     const seconds =
         Math.floor(
-            (difference %
+            (distance %
             (1000 * 60)) /
             1000
         );
 
 
-    document.getElementById("days")
-    .textContent =
+    document.getElementById("days").textContent =
         String(days).padStart(2,"0");
 
-
-    document.getElementById("hours")
-    .textContent =
+    document.getElementById("hours").textContent =
         String(hours).padStart(2,"0");
 
-
-    document.getElementById("minutes")
-    .textContent =
+    document.getElementById("minutes").textContent =
         String(minutes).padStart(2,"0");
 
-
-    document.getElementById("seconds")
-    .textContent =
+    document.getElementById("seconds").textContent =
         String(seconds).padStart(2,"0");
 
 }
@@ -2635,69 +1709,9 @@ function updateCountdown(){
 
 updateCountdown();
 
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-
-/* =====================================================
-   MENSAJE WHATSAPP
-===================================================== */
-
-function sendMessage(){
-
-    const textarea =
-        document.getElementById("guestMessage");
-
-    const message =
-        textarea.value.trim();
-
-
-    if(message === ""){
-
-        alert(
-            "Escribí un mensaje antes de enviarlo. 💌"
-        );
-
-        return;
-
-    }
-
-
-    /*
-       CAMBIAR ESTE NÚMERO
-       por el WhatsApp real.
-    */
-
-    const phone =
-        "5491100000000";
-
-
-    const text =
-        "Hola María y Juan ❤️%0A%0A" +
-        encodeURIComponent(message) +
-        "%0A%0A¡Felices 50 años! 🥂";
-
-
-    const whatsapp =
-        "https://wa.me/" +
-        phone +
-        "?text=" +
-        text;
-
-
-    window.open(
-        whatsapp,
-        "_blank"
-    );
-
-}
-
+setInterval(updateCountdown,1000);
 
 </script>
-
 
 </body>
 </html>
